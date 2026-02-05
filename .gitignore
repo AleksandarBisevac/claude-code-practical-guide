@@ -8,6 +8,7 @@ vendor/
 dist/
 build/
 out/
+.next/
 *.log
 
 # Environment variables
@@ -42,5 +43,5 @@ temp/
 Thumbs.db
 .DS_Store
 
-# Cluade files
-.cluade/settings.local.json
+# Claude files
+.claude/settings.local.json
