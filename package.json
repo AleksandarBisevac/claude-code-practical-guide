@@ -3,18 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "bun run --bun next dev",
+    "build": "bun run --bun next build",
+    "start": "bun run --bun next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@tiptap/pm": "^3.19.0",
+    "@tiptap/react": "^3.19.0",
+    "@tiptap/starter-kit": "^3.19.0",
+    "better-auth": "^1.4.18",
+    "better-sqlite3": "^12.6.2",
+    "nanoid": "^5.1.6",
     "next": "16.1.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/bun": "^1.3.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -28,6 +37,7 @@
     "unrs-resolver"
   ],
   "trustedDependencies": [
+    "better-sqlite3",
     "sharp",
     "unrs-resolver"
   ]

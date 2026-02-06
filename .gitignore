@@ -43,5 +43,10 @@ temp/
 Thumbs.db
 .DS_Store
 
+# Database
+database.sqlite
+database.sqlite-shm
+database.sqlite-wal
+
 # Claude files
 .claude/settings.local.json
