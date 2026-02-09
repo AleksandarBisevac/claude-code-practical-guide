@@ -1,5 +1,5 @@
-import Link from "next/link";
-import LogoutButton from "./LogoutButton";
+import Link from 'next/link';
+import LogoutButton from './LogoutButton';
 
 export default function Header({ userName }: { userName: string }) {
   return (

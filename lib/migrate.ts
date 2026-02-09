@@ -1,4 +1,4 @@
-import { Database } from "bun:sqlite";
+import { Database } from 'bun:sqlite';
 
 const MIGRATIONS: { version: number; sql: string }[] = [
   {
@@ -31,24 +31,22 @@ export function migrate(db: Database): void {
   `);
 
   const applied = new Set(
-    (db.query("SELECT version FROM _migrations").all() as { version: number }[]).map(
-      (r) => r.version
-    )
+    (db.query('SELECT version FROM _migrations').all() as { version: number }[]).map(
+      (r) => r.version,
+    ),
   );
 
   for (const migration of MIGRATIONS) {
     if (applied.has(migration.version)) continue;
-    db.run("BEGIN");
+    db.run('BEGIN');
     try {
       db.run(migration.sql);
-      db.query("INSERT INTO _migrations (version) VALUES (?)").run(
-        migration.version
-      );
-      db.run("COMMIT");
+      db.query('INSERT INTO _migrations (version) VALUES (?)').run(migration.version);
+      db.run('COMMIT');
     } catch (err) {
-      db.run("ROLLBACK");
+      db.run('ROLLBACK');
       throw new Error(
-        `Migration ${migration.version} failed: ${err instanceof Error ? err.message : err}`
+        `Migration ${migration.version} failed: ${err instanceof Error ? err.message : err}`,
       );
     }
   }

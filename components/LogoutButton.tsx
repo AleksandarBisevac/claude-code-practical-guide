@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 export default function LogoutButton() {
   const router = useRouter();
 
   async function handleLogout() {
     await authClient.signOut();
-    router.push("/authenticate");
+    router.push('/authenticate');
   }
 
   return (

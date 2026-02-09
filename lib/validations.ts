@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as z from 'zod/v4';
 
 export const createNoteSchema = z.object({
   title: z.string().min(1).max(500).optional(),

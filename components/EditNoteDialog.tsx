@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRef, useState } from "react";
-import NoteEditor from "./NoteEditor";
-import { saveNote } from "@/app/notes/[id]/actions";
-import type { JSONContent } from "@tiptap/react";
+import { useRef, useState } from 'react';
+import NoteEditor from './NoteEditor';
+import { saveNote } from '@/app/notes/[id]/actions';
+import type { JSONContent } from '@tiptap/react';
 
 interface EditNoteDialogProps {
   noteId: string;
@@ -52,6 +52,7 @@ export default function EditNoteDialog({
 
       <dialog
         ref={dialogRef}
+        aria-label="Edit note"
         className="w-full max-w-3xl rounded-xl bg-slate-900 border border-white/10 p-0 text-white backdrop:bg-black/60"
       >
         <div className="relative p-6 space-y-4">
@@ -59,8 +60,19 @@ export default function EditNoteDialog({
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-900/80 rounded-xl">
               <div className="flex items-center gap-3 text-white/80">
                 <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
                 </svg>
                 Saving...
               </div>
@@ -74,6 +86,7 @@ export default function EditNoteDialog({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Note title"
+            aria-label="Note title"
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
 

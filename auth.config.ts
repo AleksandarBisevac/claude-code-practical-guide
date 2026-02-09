@@ -4,11 +4,11 @@
  *
  * Run migrations: bun x @better-auth/cli@latest migrate --config auth.config.ts
  */
-import { betterAuth } from "better-auth";
-import Database from "better-sqlite3";
+import { betterAuth } from 'better-auth';
+import Database from 'better-sqlite3';
 
 export const auth = betterAuth({
-  database: new Database("database.sqlite"),
+  database: new Database('database.sqlite'),
   emailAndPassword: { enabled: true },
   experimental: { joins: true },
 });

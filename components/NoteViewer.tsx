@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import type { JSONContent } from "@tiptap/react";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import type { JSONContent } from '@tiptap/react';
 
 export default function NoteViewer({ content }: { content: JSONContent }) {
   const editor = useEditor({

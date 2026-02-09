@@ -96,9 +96,7 @@ All note operations MUST filter by `user_id` to prevent cross-user access:
 
 ```typescript
 // Example: Always include user_id in WHERE clause
-const note = db
-  .query("SELECT * FROM notes WHERE id = ? AND user_id = ?")
-  .get(noteId, userId);
+const note = db.query('SELECT * FROM notes WHERE id = ? AND user_id = ?').get(noteId, userId);
 ```
 
 ### TipTap Content Storage

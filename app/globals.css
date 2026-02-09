@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -47,7 +47,8 @@ body {
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       translate: 0 0;
     }
     50% {
@@ -56,7 +57,9 @@ body {
   }
 
   .animate-greeting {
-    animation: greeting 1s ease-out forwards, float 3s ease-in-out 1s infinite;
+    animation:
+      greeting 1s ease-out forwards,
+      float 3s ease-in-out 1s infinite;
   }
 
   .fade-in {

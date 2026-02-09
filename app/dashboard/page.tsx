@@ -1,13 +1,13 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { getNotesByUser } from "@/lib/notes";
-import Link from "next/link";
-import Header from "@/components/Header";
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { getNotesByUser } from '@/lib/notes';
+import Link from 'next/link';
+import Header from '@/components/Header';
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) redirect("/authenticate");
+  if (!session) redirect('/authenticate');
 
   const notes = getNotesByUser(session.user.id);
 

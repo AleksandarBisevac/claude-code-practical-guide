@@ -1,12 +1,12 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import Header from "@/components/Header";
-import NewNoteForm from "@/components/NewNoteForm";
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import Header from '@/components/Header';
+import NewNoteForm from '@/components/NewNoteForm';
 
 export default async function NewNotePage() {
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) redirect("/authenticate");
+  if (!session) redirect('/authenticate');
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900">

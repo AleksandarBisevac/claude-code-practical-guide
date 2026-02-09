@@ -1,5 +1,5 @@
-import { db } from "./db";
-import { nanoid } from "nanoid";
+import { db } from './db';
+import { nanoid } from 'nanoid';
 
 export type Note = {
   id: string;
@@ -12,7 +12,7 @@ export type Note = {
   updatedAt: string;
 };
 
-type NoteRow = {
+export type NoteRow = {
   id: string;
   user_id: string;
   title: string;
@@ -23,7 +23,7 @@ type NoteRow = {
   updated_at: string;
 };
 
-function rowToNote(row: NoteRow): Note {
+export function rowToNote(row: NoteRow): Note {
   return {
     id: row.id,
     userId: row.user_id,
@@ -37,22 +37,22 @@ function rowToNote(row: NoteRow): Note {
 }
 
 const DEFAULT_CONTENT = JSON.stringify({
-  type: "doc",
-  content: [{ type: "paragraph" }],
+  type: 'doc',
+  content: [{ type: 'paragraph' }],
 });
 
 export function createNote(
   userId: string,
-  data: { title?: string; contentJson?: string } = {}
+  data: { title?: string; contentJson?: string } = {},
 ): Note {
   const id = nanoid();
-  const title = data.title ?? "Untitled note";
+  const title = data.title ?? 'Untitled note';
   const contentJson = data.contentJson ?? DEFAULT_CONTENT;
   const now = new Date().toISOString();
 
   db.query(
     `INSERT INTO notes (id, user_id, title, content_json, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?)`
+     VALUES (?, ?, ?, ?, ?, ?)`,
   ).run(id, userId, title, contentJson, now, now);
 
   return {
@@ -68,16 +68,16 @@ export function createNote(
 }
 
 export function getNoteById(userId: string, noteId: string): Note | null {
-  const row = db
-    .query("SELECT * FROM notes WHERE id = ? AND user_id = ?")
-    .get(noteId, userId) as NoteRow | undefined;
+  const row = db.query('SELECT * FROM notes WHERE id = ? AND user_id = ?').get(noteId, userId) as
+    | NoteRow
+    | undefined;
 
   return row ? rowToNote(row) : null;
 }
 
 export function getNotesByUser(userId: string): Note[] {
   const rows = db
-    .query("SELECT * FROM notes WHERE user_id = ? ORDER BY updated_at DESC")
+    .query('SELECT * FROM notes WHERE user_id = ? ORDER BY updated_at DESC')
     .all(userId) as NoteRow[];
 
   return rows.map(rowToNote);
@@ -86,7 +86,7 @@ export function getNotesByUser(userId: string): Note[] {
 export function updateNote(
   userId: string,
   noteId: string,
-  data: Partial<{ title: string; contentJson: string }>
+  data: Partial<{ title: string; contentJson: string }>,
 ): Note | null {
   const existing = getNoteById(userId, noteId);
   if (!existing) return null;
@@ -97,24 +97,18 @@ export function updateNote(
 
   db.query(
     `UPDATE notes SET title = ?, content_json = ?, updated_at = ?
-     WHERE id = ? AND user_id = ?`
+     WHERE id = ? AND user_id = ?`,
   ).run(title, contentJson, now, noteId, userId);
 
   return { ...existing, title, contentJson, updatedAt: now };
 }
 
 export function deleteNote(userId: string, noteId: string): boolean {
-  const result = db
-    .query("DELETE FROM notes WHERE id = ? AND user_id = ?")
-    .run(noteId, userId);
+  const result = db.query('DELETE FROM notes WHERE id = ? AND user_id = ?').run(noteId, userId);
   return result.changes > 0;
 }
 
-export function setNotePublic(
-  userId: string,
-  noteId: string,
-  isPublic: boolean
-): Note | null {
+export function setNotePublic(userId: string, noteId: string, isPublic: boolean): Note | null {
   const existing = getNoteById(userId, noteId);
   if (!existing) return null;
 
@@ -129,7 +123,7 @@ export function setNotePublic(
 
   db.query(
     `UPDATE notes SET is_public = ?, public_slug = ?, updated_at = ?
-     WHERE id = ? AND user_id = ?`
+     WHERE id = ? AND user_id = ?`,
   ).run(isPublic ? 1 : 0, publicSlug, now, noteId, userId);
 
   return {
@@ -141,9 +135,9 @@ export function setNotePublic(
 }
 
 export function getNoteByPublicSlug(slug: string): Note | null {
-  const row = db
-    .query("SELECT * FROM notes WHERE public_slug = ? AND is_public = 1")
-    .get(slug) as NoteRow | undefined;
+  const row = db.query('SELECT * FROM notes WHERE public_slug = ? AND is_public = 1').get(slug) as
+    | NoteRow
+    | undefined;
 
   return row ? rowToNote(row) : null;
 }

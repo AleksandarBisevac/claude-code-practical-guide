@@ -146,11 +146,11 @@ Users can toggle note "public sharing":
 
 ```typescript
 // lib/auth.ts
-import { betterAuth } from "better-auth";
-import { Database } from "bun:sqlite";
+import { betterAuth } from 'better-auth';
+import { Database } from 'bun:sqlite';
 
 export const auth = betterAuth({
-  database: new Database("database.sqlite"),
+  database: new Database('database.sqlite'),
   // ... other configuration
 });
 ```
@@ -182,8 +182,8 @@ Enable database joins for improved performance (2-3x faster for endpoints like `
 
 ```typescript
 export const auth = betterAuth({
-  database: new Database("database.sqlite"),
-  experimental: { joins: true }
+  database: new Database('database.sqlite'),
+  experimental: { joins: true },
 });
 ```
 
@@ -205,16 +205,16 @@ CREATE TABLE notes (
 );
 ```
 
-| Field        | Type    | Description                                               |
-| ------------ | ------- | --------------------------------------------------------- |
-| id           | TEXT    | Unique identifier for each note (primary key)             |
-| user_id      | TEXT    | The ID of the note owner (foreign key to user.id)         |
-| title        | TEXT    | Note title                                                |
-| content_json | TEXT    | TipTap document stored as JSON string                     |
-| is_public    | INTEGER | Whether the note is publicly accessible (0 or 1)          |
-| public_slug  | TEXT    | Unique slug for public URL (null if not public)           |
-| created_at   | TEXT    | Timestamp of when the note was created                    |
-| updated_at   | TEXT    | Timestamp of when the note was last updated               |
+| Field        | Type    | Description                                       |
+| ------------ | ------- | ------------------------------------------------- |
+| id           | TEXT    | Unique identifier for each note (primary key)     |
+| user_id      | TEXT    | The ID of the note owner (foreign key to user.id) |
+| title        | TEXT    | Note title                                        |
+| content_json | TEXT    | TipTap document stored as JSON string             |
+| is_public    | INTEGER | Whether the note is publicly accessible (0 or 1)  |
+| public_slug  | TEXT    | Unique slug for public URL (null if not public)   |
+| created_at   | TEXT    | Timestamp of when the note was created            |
+| updated_at   | TEXT    | Timestamp of when the note was last updated       |
 
 #### Indexes for notes table
 
@@ -235,13 +235,13 @@ Initialize a shared Bun SQLite client for application data (notes). Authenticati
 **Example:**
 
 ```typescript
-import { Database } from "bun:sqlite";
+import { Database } from 'bun:sqlite';
 
 let db: Database | null = null;
 
 export function getDb(): Database {
   if (!db) {
-    db = new Database("database.sqlite");
+    db = new Database('database.sqlite');
   }
   return db;
 }
@@ -493,10 +493,10 @@ Enable at minimum:
 **Example editor config:**
 
 ```typescript
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Code from "@tiptap/extension-code";
-import CodeBlock from "@tiptap/extension-code-block";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Code from '@tiptap/extension-code';
+import CodeBlock from '@tiptap/extension-code-block';
 
 const editor = useEditor({
   extensions: [
